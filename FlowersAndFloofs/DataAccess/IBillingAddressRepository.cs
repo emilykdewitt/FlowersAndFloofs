@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FlowersAndFloofs.DataAccess
 {
-     public interface IAddressRepository
+     public interface IBillingAddressRepository
     {
         IEnumerable<Address> GetAddress();
         bool AddAddress(AddAddressDTO newAddress);

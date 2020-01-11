@@ -9,7 +9,7 @@ using FlowersAndFloofs.Models;
 
 namespace FlowersAndFloofs.DataAccess
 {
-    public class ShippingAddressRepository : IAddressRepository
+    public class ShippingAddressRepository : IShippingAddressRepository
     {
         string _connectionString = "Server = localhost; Database = FlowersAndFloofs; Trusted_Connection = True";
         public bool AddAddress(AddAddressDTO newAddress)

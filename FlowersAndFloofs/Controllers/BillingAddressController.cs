@@ -16,9 +16,9 @@ namespace FlowersAndFloofs.Controllers
     public class BillingAddressController : ControllerBase
     {
         //private readonly ILogger<BillingAddressController> _logger;
-        private readonly IAddressRepository _repo;
+        private readonly IBillingAddressRepository _repo;
 
-        public BillingAddressController(/*ILogger<BillingAddressController> logger, */IAddressRepository repo)
+        public BillingAddressController(/*ILogger<BillingAddressController> logger, */IBillingAddressRepository repo)
         {
             //_logger = logger;
             _repo = repo;

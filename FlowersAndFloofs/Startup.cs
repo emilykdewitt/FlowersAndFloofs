@@ -35,8 +35,8 @@ namespace FlowersAndFloofs
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             //services.AddControllers();
             services.AddTransient<SqlConnection>(provider => new SqlConnection(connectionString));
-            services.AddScoped<IAddressRepository, BillingAddressRepository>();
-            services.AddScoped<IAddressRepository, ShippingAddressRepository>();
+            services.AddScoped<IBillingAddressRepository, BillingAddressRepository>();
+            services.AddScoped<IShippingAddressRepository, ShippingAddressRepository>();
             services.AddScoped<IBundleRepository, BundleRepository>();
             services.AddScoped<IOccasionRepository, OccasionRepository>();
             services.AddScoped<IPaymentMethodRepository, PaymentMethodRepository>();

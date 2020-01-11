@@ -1,13 +1,5 @@
 import React from 'react';
-import {
-    Row,
-    // Form, 
-    // FormGroup, 
-    // Label, 
-    // Input, 
-    // FormText, 
-    Button,
-} from 'reactstrap';
+import { Row, Button, } from 'reactstrap';
 
 import billingAddressRequest from '../../DataRequests/billingAddressRequest';
 import shippingAddressRequest from '../../DataRequests/shippingAddressRequest';
@@ -36,12 +28,22 @@ const defaultShippingAddress = {
     zipCode: '',
 }
 
+const defaultOrder = {
+    customerId: 1,
+    isComplete: true,
+    orderTotal: '',
+    billingAddressId: '',
+    shippingAddressId: '',
+    paymentId: '2',
+}
+
 class Checkout extends React.Component {
     state = {
         billingAddresses: [],
         shippingAddresses: [],
         newBillingAddress: defaultBillingAddress,
         newShippingAddress: defaultShippingAddress,
+        newOrder: defaultOrder,
     }
 
     componentDidMount() {
@@ -53,6 +55,16 @@ class Checkout extends React.Component {
             this.setState({ shippingAddresses: data })
             console.error("all shipping addresses: ", this.state.shippingAddresses);
         });
+    }
+
+    getUserBillingAddresses = () => {
+        billingAddressRequest.getUserBillingAddresses()
+        .then(billingAddresses => {
+            this.setState({ billingAddresses });
+            console.error('billingAddresses state successfully updated')
+            }
+        )
+        .catch(err => console.error('could not update state of billing addresses'));
     }
 
     BAFormFieldStringState = (name, e) => {
@@ -86,6 +98,16 @@ class Checkout extends React.Component {
     SAStateChange = e => this.SAFormFieldStringState('state', e);
 
     SAZipCodeChange = e => this.SAFormFieldStringState('zipCode', e);
+
+    calculateCartTotalForOrder = e => {
+        e.preventDefault();
+        const myCurrentCart = this.props.myCart;
+        var orderTotal = 0;
+        for(var i=0; i< myCurrentCart.length; i++) {
+            orderTotal += myCurrentCart[i].price;
+        }
+        console.log(orderTotal.toFixed(2));
+    }
 
     addBillingAddressClickEvent = (e) => {
         e.preventDefault();
@@ -121,6 +143,7 @@ class Checkout extends React.Component {
     makeBillingAddresses = (results) => {
         return results.map(address => (
             <SingleAddress
+                { ...this.props }
                 key={address.id}
                 streetAddress={address.streetAddress}
                 aptOrHouseNum={address.aptOrHouseNum}

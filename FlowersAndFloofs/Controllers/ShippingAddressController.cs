@@ -14,9 +14,9 @@ namespace FlowersAndFloofs.Controllers
     [ApiController]
     public class ShippingAddressController : ControllerBase
     {
-        private readonly IAddressRepository _repo;
+        private readonly IShippingAddressRepository _repo;
 
-        public ShippingAddressController(IAddressRepository repo)
+        public ShippingAddressController(IShippingAddressRepository repo)
         {
             _repo = repo;
 

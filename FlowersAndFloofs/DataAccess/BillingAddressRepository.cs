@@ -9,7 +9,7 @@ using Dapper;
 
 namespace FlowersAndFloofs.DataAccess
 {
-    public class BillingAddressRepository : IAddressRepository
+    public class BillingAddressRepository : IBillingAddressRepository
     {
         string _connectionString = "Server = localhost; Database = FlowersAndFloofs; Trusted_Connection = True";
         public bool AddAddress(AddAddressDTO newAddress)

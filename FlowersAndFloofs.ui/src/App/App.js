@@ -93,12 +93,19 @@ class App extends React.Component {
       return cartLen;
     }
 
-      getPrice = (price,unitPrice) =>{
-        tempPrice.push(price);
-        tempUnitPrice.push(unitPrice);
-        tempCart.unitPrice = unitPrice;
-        tempCart.price = price;
-      } 
+    getPrice = (price,unitPrice) =>{
+      tempPrice.push(price);
+      tempUnitPrice.push(unitPrice);
+      tempCart.unitPrice = unitPrice;
+      tempCart.price = price;
+    }
+
+    calculateCartTotal = () => {
+      console.log(this.state.myCart)
+      //get the cart from state
+      //for each item in the array, multiply the quantity times the unitPrice
+      //then add all of the individual totals into a grand total
+    }
 
     addQuantityToCart = (cartWithQuantity) => { 
           tempCart = cartWithQuantity;
@@ -173,7 +180,12 @@ class App extends React.Component {
                 <PrivateRoute path='/my-account' component={MyAccount} authed={authed} />
                 <PrivateRoute path='/orders' component={MyOrders} authed={authed} />
                 <PrivateRoute path='/shop' component={Shop} authed={authed} />
-                <PrivateRoute path='/checkout' component={Checkout} authed={authed} />
+                <PrivateRoute path='/checkout' 
+                  component={Checkout} 
+                  authed={authed} 
+                  calculateCartTotal={this.calculateCartTotal}
+                  myCart={this.state.myCart}
+                  />
                 <Redirect from="*" to="/landing-page" />
               </Switch>
             </div>
