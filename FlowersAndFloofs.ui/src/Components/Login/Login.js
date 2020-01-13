@@ -10,8 +10,6 @@ class Login extends React.Component {
       email: '',
       password: '',
     },
-    customerObj: {},
-    personalObj: {}
   };
 
   loginClickEvent = (e) => {
@@ -21,13 +19,8 @@ class Login extends React.Component {
     authRequests
       .loginUser(user)
       .then(() => {
-        customerData.getCustomerInfoByEmail(user.email).then((resp) => {
-          this.setState({customerObj: this.props.getCurrentCustomer(resp.data)});
-          this.setState({personalObj:this.props.getCustomerPersonalData(resp.data)});
-          console.error('customer obj from login', this.state.customerObj);
-          console.error('personal obj from login', this.state.personalObj);
-
-        })
+        console.error('login user', customerData.getCustomerInfoByEmail(user.email))
+        this.props.history.push('/trainers');
       })
       .catch(error => {
         console.error('there was an error in registering', error);
