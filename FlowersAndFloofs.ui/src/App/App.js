@@ -172,6 +172,8 @@ class App extends React.Component {
                   path="/login"
                   authed={authed}
                   component={Login}
+                  getCurrentCustomer={this.getCurrentCustomer}
+                  getCustomerPersonalData={this.getCustomerPersonalData}
                 />
                   <PublicRoute
                   path="/register"
@@ -185,7 +187,9 @@ class App extends React.Component {
                 handleAddToCart = {this.handleAddToCart} 
                 addQuantityToCart={this.addQuantityToCart} 
                 myCart={this.state.myCart} 
-                getPrice={this.getPrice} />
+                getPrice={this.getPrice}
+                currentCustomer={this.state.currentCustomer}
+                customerPersonalData={this.state.currentCustomerPersonal} />
                 <PrivateRoute path='/my-account'
                 component={MyAccount}
                 authed={authed}

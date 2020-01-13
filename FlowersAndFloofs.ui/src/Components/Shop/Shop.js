@@ -6,6 +6,10 @@ import bundleRequest from '../../DataRequests/bundleRequest';
 import SingleBundle from '../SingleBundle/SingleBundle';
 import SearchBarIcon from '../NavBar/Icons/SearchBarIcon';
 import occasionRequest from '../../DataRequests/occasionRequest';
+import customerData from '../../DataRequests/customersData';
+import authRequests from '../Auth/Auth';
+
+
 
 import './Shop.scss';
 
@@ -19,6 +23,8 @@ class Shop extends React.Component {
     bundles: [],
     filteredBundles: [],
     occasions: [],
+    customerObj: {},
+    personalObj: {}
   }
 
   componentDidMount() {
@@ -35,6 +41,22 @@ class Shop extends React.Component {
       let allOccasions = [...data];
       this.setState({ occasions: allOccasions });
     });
+
+      customerData.getCustomerInfoByEmail(authRequests.getEmail()).then((resp) => {
+        // this.setState({customerObj: this.props.currentCustomer});
+        this.setState({personalObj: resp});
+        // console.error('customer obj from login', this.state.customerObj);
+        console.error('personal obj from shop', this.state.personalObj);
+
+      })
+
+
+    const customer = this.props.currentCustomer;
+    const personal = this.props.customerPersonalData;
+
+    console.error('customer obj in shop', customer);
+
+    console.error('personal obj in shop', personal);
   }
 
   getBundles = () => {
@@ -99,8 +121,6 @@ class Shop extends React.Component {
         {occasion.name}
       </Button>
     ))
-    const customer = this.props.currentCustomer;
-    const personal = this.props.customerPersonalData;
 
     return (
       <Container>
